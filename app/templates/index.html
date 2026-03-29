@@ -1,0 +1,36 @@
+<!-- app/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis on Social Media Data</h1>
+        <form action="/" method="POST">
+            <label for="keyword">Enter a Keyword/Hashtag:</label>
+            <input type="text" id="keyword" name="keyword" required>
+
+            <label for="platform">Select Platform:</label>
+            <select name="platform" id="platform">
+                <option value="twitter">Twitter</option>
+                <option value="reddit">Reddit</option>
+            </select>
+
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if sentiment_result %}
+        <h2>Sentiment Analysis Results for "{{ keyword }}"</h2>
+        <div class="results">
+            <p><strong>Positive:</strong> {{ sentiment_result['positive'] }}</p>
+            <p><strong>Negative:</strong> {{ sentiment_result['negative'] }}</p>
+            <p><strong>Neutral:</strong> {{ sentiment_result['neutral'] }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
